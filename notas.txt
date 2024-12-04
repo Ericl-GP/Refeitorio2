@@ -1,0 +1,34 @@
+#no models
+
+    def save(self):
+        super().save()
+        im = Image.open(self.foto_aluno.path)
+        novo_tamanho = (40, 40)
+        im.thumbnail(novo_tamanho)
+        im.save(self.foto_indicador.path)
+
+    def foto_url(self):
+        if self.foto_aluno and hasattr(self.foto_aluno, 'url'):
+            return self.foto_aluno.url
+        else:
+            return self.nome_aluno
+
+#na urls
+
+re_path(r'^img/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+
+
+
+
+]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+#no settings
+
+
+STATIC_URL = 'static/'
+MEDIA_URL = '/img/'
+STATICFILES_DIRS =[
+    os.path.join(BASE_DIR, 'static'),
+]
+MEDIA_ROOT =   os.path.join(BASE_DIR, 'cpasisApp/static/img')
